@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.semonx.jnshu.dao.StudentDao">
+
+    <!--查询所有学生-->
+    <select id="findAllStudent" resultType="com.semonx.jnshu.domain.Student">
+        SELECT ID,name,qq,profession,join_date,school,online_id,daily_url,
+        declaration,introducer,referee,counselor,description,city,review
+        FROM entry_form
+    </select>
+
+    <!--通过ID查询学生-->
+    <select id="findStudentById" resultType="com.semonx.jnshu.domain.Student">
+        SELECT ID,name,qq,profession,join_date,school,online_id,daily_url,
+        declaration,introducer,referee,counselor,description,city,review
+        FROM entry_form WHERE ID=#{id}
+    </select>
+
+    <!--通过QQ查询学生-->
+    <select id="findStudentByQq" parameterType="String" resultType="com.semonx.jnshu.domain.Student">
+        SELECT ID,name,qq,profession,join_date,school,online_id,daily_url,
+        declaration,introducer,referee,counselor,description,city,review
+        FROM entry_form WHERE qq=#{qq}
+    </select>
+
+    <!--通过线上ID查询学生-->
+    <select id="findStudentByOnlineId" parameterType="String"
+            resultType="com.semonx.jnshu.domain.Student">
+        SELECT ID,name,qq,profession,join_date,school,online_id,daily_url,
+        declaration,introducer,referee,counselor,description,city,review
+        FROM entry_form WHERE online_id=#{onlineId}
+    </select>
+
+    <insert id="addStudent" parameterType="com.semonx.jnshu.domain.Student" keyProperty="id">
+        INSERT INTO entry_form (name,qq,profession,join_date,school,online_id,daily_url,
+        declaration,introducer,referee,counselor,description,city,review)
+        VALUES (#{name},#{qq},#{profession},#{joinDate},#{school},#{onlineId},#{dailyUrl},
+        #{declaration},#{introducer},#{referee},#{counselor},#{description},#{city},#{review})
+    </insert>
+
+    <update id="updateStudent"  parameterType="com.semonx.jnshu.domain.Student">
+        UPDATE entry_form SET name=#{name},qq=#{qq},profession=#{profession},
+        join_date=#{joinDate},school=#{school},
+        online_id=#{onlineId},daily_url=#{dailyUrl},
+        declaration=#{declaration},introducer=#{introducer},referee=#{referee},
+        counselor=#{counselor},description=#{description},
+        city=#{city},review=#{review}
+         WHERE ID=#{id}
+    </update>
+
+    <delete id="deleteStudent" parameterType="java.lang.Long">
+        DELETE FROM entry_form WHERE ID=#{id}
+    </delete>
+</mapper>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 1. 读取jdbc.properites -->
+    <context:property-placeholder location="jdbc.properties"/>
+
+    <!-- 2. 配置DBCP数据源 -->
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+
+        <!--配置初始化的连接数-->
+        <property name="initialSize" value="0"/>
+        <!--配置最大连接数。注：maxTotal是版本更新后的名字，以前类似的功能叫maxActive-->
+        <property name="maxTotal" value="100"/>
+        <!--配置最大空闲连接数-->
+        <property name="maxIdle" value="10"/>
+        <!--配置最小空闲连接数-->
+        <property name="minIdle" value="0"/>
+        <!--没有可用连接时的最长等待时间，单位毫秒-->
+        <property name="maxWaitMillis" value="120000"/>
+    </bean>
+
+
+    <!-- 3.配置SqlSessionFactory对象 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--注入数据源-->
+        <property name="dataSource" ref="dataSource"/>
+        <!--注入Mybatis的配置文件-->
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <!--扫描mapper需要的xml配置文件-->
+        <property name="mapperLocations" value="classpath:mapper/StudentMapper.xml"/>
+        
+    </bean>
+
+    <!-- 4.配置扫描Dao接口包，动态实现Dao接口，注入到spring容器中 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 注入SQLSessionFactory -->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <!-- 扫描Dao包 -->
+        <property name="basePackage" value="com.semonx.jnshu.dao"/>
+    </bean>
+</beans>
