@@ -5,12 +5,10 @@ import com.semonx.jnshu.service.StudentService;
 import com.semonx.jnshu.web.exception.InvalidParameterException;
 import com.semonx.jnshu.web.exception.StudentNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -18,9 +16,7 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-import static org.springframework.web.bind.annotation.RequestMethod.PUT;
+import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 /**
  * Created by Semon on 2017/5/12.
@@ -76,6 +72,16 @@ public class StudentRestController {
         return responseEntity;
     }
 
+    @RequestMapping(value = "/{id}", method = DELETE)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteStudent(@PathVariable long id) {
+        Student s = service.findStudentById(id);
+        if (s == null) {
+            throw new StudentNotFoundException(id);
+        }
+        service.deleteStudent(id);
+    }
+
     @ExceptionHandler(StudentNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public Error studentNotFound(StudentNotFoundException exception) {
@@ -86,6 +92,6 @@ public class StudentRestController {
     @ExceptionHandler(InvalidParameterException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Error invalidParameter(InvalidParameterException exception) {
-        return new Error(4, "提交的参数有误。");
+        return new Error(0, "提交的参数有误。");
     }
 }
