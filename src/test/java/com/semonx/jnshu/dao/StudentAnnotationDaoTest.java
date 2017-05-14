@@ -22,54 +22,54 @@ public class StudentAnnotationDaoTest {
 
     @Autowired
     private StudentAnnotationDao dao;
-    private Student studentId5;
+//    private Student studentId5;
     private Student crudTestStudent;
 
     private static Logger logger = Logger.getLogger(StudentAnnotationDaoTest.class);
 
     @Before
     public void setUp() {
-        initStudentId5();
+//        initStudentId5();
         initCrudTestStudent();
     }
 
-    // 测试获取所有学生
-    @Test
-    public void testFindAllStudent() {
-        // 调用接口方法
-        List<Student> studentList = dao.findAllStudent();
+//    // 测试获取所有学生
+//    @Test
+//    public void testFindAllStudent() {
+//        // 调用接口方法
+//        List<Student> studentList = dao.findAllStudent();
+//
+//        assertNotNull(studentList);
+//        assertTrue(studentList.size() > 0);
+////        assertEquals(10, studentList.size());
+//    }
 
-        assertNotNull(studentList);
-        assertTrue(studentList.size() > 0);
-//        assertEquals(10, studentList.size());
-    }
-
-    // 测试通过ID查询一个学生
-    @Test
-    public void testFindStudentById() {
-        Student student = dao.findStudentById(studentId5.getId());
-
-        assertNotNull(student);
-        assertStudentEquals(studentId5, student);
-    }
-
-    // 测试通过qq查询一个学生
-    @Test
-    public void testFindStudentByQq() {
-        Student student = dao.findStudentByQq(studentId5.getQq());
-
-        assertNotNull(student);
-        assertStudentEquals(studentId5, student);
-    }
-
-    // 测试通过online_id查询一个学生
-    @Test
-    public void testFindStudentByOnlineId() {
-        Student student = dao.findStudentByOnlineId(studentId5.getOnlineId());
-
-        assertNotNull(student);
-        assertStudentEquals(studentId5, student);
-    }
+//    // 测试通过ID查询一个学生
+//    @Test
+//    public void testFindStudentById() {
+//        Student student = dao.findStudentById(studentId5.getId());
+//
+//        assertNotNull(student);
+//        assertStudentEquals(studentId5, student);
+//    }
+//
+//    // 测试通过qq查询一个学生
+//    @Test
+//    public void testFindStudentByQq() {
+//        Student student = dao.findStudentByQq(studentId5.getQq());
+//
+//        assertNotNull(student);
+//        assertStudentEquals(studentId5, student);
+//    }
+//
+//    // 测试通过online_id查询一个学生
+//    @Test
+//    public void testFindStudentByOnlineId() {
+//        Student student = dao.findStudentByOnlineId(studentId5.getOnlineId());
+//
+//        assertNotNull(student);
+//        assertStudentEquals(studentId5, student);
+//    }
 
     // 测试CRUD
     @Test
@@ -114,37 +114,37 @@ public class StudentAnnotationDaoTest {
         assertFalse(deleteResult);
     }
 
-    @Test
-    public void testLog() {
-        // 记录debug级别的信息
-        logger.debug("This is debug message.");
-        // 记录info级别的信息
-        logger.info("This is info message.");
-        // 记录error级别的信息
-        logger.error("This is error message.");
-    }
+//    @Test
+//    public void testLog() {
+//        // 记录debug级别的信息
+//        logger.debug("This is debug message.");
+//        // 记录info级别的信息
+//        logger.info("This is info message.");
+//        // 记录error级别的信息
+//        logger.error("This is error message.");
+//    }
 
-    private void initStudentId5() {
-        studentId5 = new Student();
-
-        studentId5.setId(5);
-        studentId5.setName("陈小六");
-        studentId5.setQq("15044774771");
-        studentId5.setProfession("JAVA工程师");
-        studentId5.setJoinDate(1491753600000L);
-        studentId5.setSchool("内蒙古电子信息职业技术学院");
-        studentId5.setOnlineId("1488");
-        studentId5.setDailyUrl("http://www.jnshu.com/daily/18132?uid=10224");
-        studentId5.setDeclaration("如果我不能在IT 特训营拼尽全力，为自己以后的修行路上打好基础，就让我永远追不到喜欢的人，给不了她想要的生活！");
-        studentId5.setIntroducer("");
-        studentId5.setReferee("");
-        studentId5.setCounselor("");
-        studentId5.setDescription("从知乎暗灭了解 到的修真院\n" +
-                "\n" +
-                "来的目的：打好编程基础，锻炼编程效率，思维。");
-        studentId5.setCity("北京");
-        studentId5.setReview("待审核");
-    }
+//    private void initStudentId5() {
+//        studentId5 = new Student();
+//
+//        studentId5.setId(5);
+//        studentId5.setName("陈小六");
+//        studentId5.setQq("15044774771");
+//        studentId5.setProfession("JAVA工程师");
+//        studentId5.setJoinDate(1491753600000L);
+//        studentId5.setSchool("内蒙古电子信息职业技术学院");
+//        studentId5.setOnlineId("1488");
+//        studentId5.setDailyUrl("http://www.jnshu.com/daily/18132?uid=10224");
+//        studentId5.setDeclaration("如果我不能在IT 特训营拼尽全力，为自己以后的修行路上打好基础，就让我永远追不到喜欢的人，给不了她想要的生活！");
+//        studentId5.setIntroducer("");
+//        studentId5.setReferee("");
+//        studentId5.setCounselor("");
+//        studentId5.setDescription("从知乎暗灭了解 到的修真院\n" +
+//                "\n" +
+//                "来的目的：打好编程基础，锻炼编程效率，思维。");
+//        studentId5.setCity("北京");
+//        studentId5.setReview("待审核");
+//    }
 
     private void initCrudTestStudent() {
         crudTestStudent = new Student();
